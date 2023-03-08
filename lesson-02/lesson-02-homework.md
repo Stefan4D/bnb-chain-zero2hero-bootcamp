@@ -1,4 +1,4 @@
-# Lesson 1 Homework
+# Lesson 2 Homework
 
 ## Author
 
