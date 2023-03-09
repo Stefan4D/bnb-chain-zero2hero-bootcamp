@@ -10,7 +10,7 @@ contract DogCoin {
         uint256 amount;
         address recipient;
     }
-    mapping (address => Payment[]) public payments;
+    mapping (address => Payment[]) payments;
 
     modifier onlyOwner {
         require(msg.sender == owner, 'You are not the contract owner');
@@ -26,11 +26,16 @@ contract DogCoin {
     function transfer(uint256 _amount, address _recipient) public {
         balances[msg.sender] -= _amount;
         balances[_recipient] += _amount;
+        payments[msg.sender].push(Payment({ amount: _amount, recipient: _recipient }));
         emit tokenTransfer(_amount, _recipient);
     }
 
     function getTotalSupply() public view returns(uint256) {
         return totalSupply;
+    }
+
+    function getPayments(address _address) public view returns(Payment[] memory) {
+        return payments[_address];
     }
 
     function increaseTotalSupply() public onlyOwner {
