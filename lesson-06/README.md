@@ -23,3 +23,11 @@ The following scripts were run to deploy and verify the contract to the BNB test
 npx hardhat run --network bnbTestnet scripts/deploy.js
 npx hardhat verify --network bnbTestnet 0xF11301F0099b69ba131e9D5Dc6923022fff63574
 ```
+
+### Unit Tests
+
+Run the following command to execute the provided unit tests:
+
+```shell
+npx hardhat test
+```
