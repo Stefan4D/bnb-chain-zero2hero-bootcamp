@@ -65,5 +65,13 @@ The following security issues and/or vulnerabilities exist in the BadLottery sma
 | SWC-102 | Outdated Compiler Version                        | Contract is using an oudated version of Solidity: 0.8.4 with the latest version being 0.8.19 (as at 15 March 2023)                                                                                   |
 | SWC-103 | Floating Pragma                                  | The pragma has been stated as ^0.8.4 rather than being locked to a specific version                                                                                                                  |
 | SWC-120 | Weak Sources of Randomness from Chain Attributes | The pickWinner() function uses a weak source of randomness by using block.timestamp.                                                                                                                 |
+| SWC-131 | Presence of unused variables                     | the prizeAmount variable is declared but never set or used other than to emit an event                                                                                                               |
 | N/A     | Unprotected functions                            | The pickWinner(), payout() and distributePrize() functions are not protected as onlyOwner, so they can be called by any user meaning that any user can make themselves a winner and trigger a payout |
 | N/A     | Unused import                                    | The contract imports from the ERC20 smart contract but does not make use of any of this functionality                                                                                                |
+| N/A     | == rather than >=                                | addNewPlayer() and payout() only check using == rather than >=                                                                                                                                       |
+
+### General Observations
+
+- The contract does not seem to operate as an actual lottery
+- There are code elements declared that appear to serve no purpose (e.g. declaring num_players when this is already stored in players.length)
+- Some code executes even if the guard clause fails: per above, the num_players variable will increment even if the if check fails
