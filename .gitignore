@@ -140,3 +140,6 @@ typechain-types
 # Hardhat files
 cache
 artifacts
+
+# System generated files
+.DS_Store
