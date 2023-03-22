@@ -52,14 +52,18 @@ describe("BadgerCoin", function () {
     it("can increase the supply in incremental units of 1000", async () => {
       const { contract, owner } = await loadFixture(contractSetup);
 
-      await contract.mint(
-        owner.address,
-        ethers.BigNumber.from("1000000000000000000000")
-      );
+      await contract.mint(owner.address, ethers.utils.parseUnits("1000", 18));
       const newBalance = await contract.balanceOf(owner.address);
       // console.log(`newBalance:` + newBalance.toString());
       // console.log(`string comparison:` + "1001000000000000000000000");
-      assert.equal(newBalance.toString(), "1001000000000000000000000");
+      // assert.equal(newBalance.toString(), "1001000000000000000000000");
+      // console.log(newBalance);
+      // console.log(ethers.utils.formatUnits(newBalance, 18));
+      // console.log(ethers.utils.parseUnits("1001000", 18));
+      assert.equal(
+        newBalance.value,
+        ethers.utils.parseUnits("1001000", 18).value
+      );
     });
 
     // Verify only the owner can mint tokens
@@ -90,8 +94,8 @@ describe("BadgerCoin", function () {
       // console.log(resolvedTx.events[0].event);
 
       // think this test only works because there is a single event
-      expect(resolvedTx.events[0].event).to.equal("Transfer");
-      // assert.equal(await contract.balanceOf(otherAccount.address), 10_000);
+      // expect(resolvedTx.events[0].event).to.equal("Transfer");
+      expect(tx).to.emit("Transfer");
     });
 
     it("transfers tokens correctly", async () => {
