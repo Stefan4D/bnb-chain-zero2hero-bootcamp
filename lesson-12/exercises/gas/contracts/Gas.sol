@@ -1,18 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.0;
+pragma solidity 0.8.19;
 
 import "./Ownable.sol";
 
-contract Constants {
-    uint256 public tradeFlag = 1;
-    uint256 public basicFlag = 0;
-    uint256 public dividendFlag = 1;
-}
-
-contract GasContract is Ownable, Constants {
-    uint256 public totalSupply = 0; // cannot be updated
+contract GasContract is Ownable {
+    uint256 private tradeFlag = 1;
+    uint256 private dividendFlag = 1;
+    uint256 public immutable totalSupply; // cannot be updated
     uint256 public paymentCounter = 0;
-    mapping(address => uint256) public balances;
+    mapping(address => uint256) private balances;
     uint256 public tradePercent = 12;
     address public contractOwner;
     uint256 public tradeMode = 0;
@@ -143,8 +139,8 @@ contract GasContract is Ownable, Constants {
     }
 
     function balanceOf(address _user) public view returns (uint256 balance_) {
-        uint256 balance = balances[_user];
-        return balance;
+        // uint256 balance = ;
+        return balances[_user];
     }
 
     function getTradingMode() public view returns (bool mode_) {
@@ -166,11 +162,11 @@ contract GasContract is Ownable, Constants {
         history.lastUpdate = block.timestamp;
         history.updatedBy = _updateAddress;
         paymentHistory.push(history);
-        bool[] memory status = new bool[](tradePercent);
-        for (uint256 i = 0; i < tradePercent; i++) {
-            status[i] = true;
-        }
-        return ((status[0] == true), _tradeMode);
+        // bool[] memory status = new bool[](tradePercent);
+        // for (uint256 i = 0; i < tradePercent; i++) {
+        //     status[i] = true;
+        // }
+        return (true, _tradeMode);
     }
 
     function getPayments(address _user)
