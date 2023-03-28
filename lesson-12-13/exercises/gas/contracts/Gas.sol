@@ -42,8 +42,8 @@ contract GasContract is Ownable {
         address updatedBy;
         uint256 blockNumber;
     }
-    uint256 wasLastOdd = 1;
-    mapping(address => uint256) public isOddWhitelistUser;
+    // uint256 wasLastOdd = 1;
+    // mapping(address => uint256) public isOddWhitelistUser;
     struct ImportantStruct {
         uint256 valueA; // max 3 digits
         uint256 bigValue;
@@ -272,16 +272,16 @@ contract GasContract is Ownable {
             whitelist[_userAddrs] -= _tier;
             whitelist[_userAddrs] = 2;
         }
-        uint256 wasLastAddedOdd = wasLastOdd;
-        if (wasLastAddedOdd == 1) {
-            wasLastOdd = 0;
-            isOddWhitelistUser[_userAddrs] = wasLastAddedOdd;
-        } else if (wasLastAddedOdd == 0) {
-            wasLastOdd = 1;
-            isOddWhitelistUser[_userAddrs] = wasLastAddedOdd;
-        } else {
-            revert("Contract hacked, imposible, call help");
-        }
+        // uint256 wasLastAddedOdd = wasLastOdd;
+        // if (wasLastAddedOdd == 1) {
+        //     wasLastOdd = 0;
+        //     isOddWhitelistUser[_userAddrs] = wasLastAddedOdd;
+        // } else if (wasLastAddedOdd == 0) {
+        //     wasLastOdd = 1;
+        //     isOddWhitelistUser[_userAddrs] = wasLastAddedOdd;
+        // } else {
+        //     revert("Contract hacked, imposible, call help");
+        // }
         emit AddedToWhitelist(_userAddrs, _tier);
     }
 
