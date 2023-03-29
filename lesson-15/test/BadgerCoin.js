@@ -175,8 +175,8 @@ describe("BadgerCoin", function () {
         owner.address,
         ethers.utils.parseUnits("1000", 18)
       );
-      expect(result).to.be.revertedWith("Pausable: paused");
-      console.log(result);
+      await expect(result).to.be.revertedWith("Pausable: paused");
+      // console.log(result);
     });
   });
 });
