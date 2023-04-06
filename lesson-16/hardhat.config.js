@@ -5,6 +5,7 @@ const { config } = require("./config.js");
 module.exports = {
   networks: {
     hardhat: {
+      chainId: 56,
       forking: {
         url: config.qnEndpoint,
       },
